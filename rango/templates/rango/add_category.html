@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-<body>
+{%extends 'rango/base.html'%}
+{%load staticfiles%}
+
+{%block title%}Add Category{%endblock%}
+{%block body_block%}
 	<h1>Add a Category</h1>
 	<form id="category_form" method="post" action="/rango/add_category/">
 		{%csrf_token%}
@@ -16,6 +19,5 @@
 		{%endfor%}
 		<input type="submit" name="submit" value="create category"></input>
 	</form>
-</body>
-</head>
+{%endblock%}
 </html>
