@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
+from django.contrib.auth import authenticate,login
 
 from rango.models import Category,Page
 from rango.forms import CategoryForm,PageForm,UserForm,UserProfileForm
@@ -98,3 +99,22 @@ def register(request):
 	return render(request,'rango/register.html',{'user_form':user_form,
 		'profile_form':profile_form,'registered':registered})
 
+def user_login(request):
+	if request.method=="POST":
+		username=request.POST.get("username")
+		password=request.POST.get("password")
+
+		user=authenticate(username=username,password=password)
+		if(user):
+			if (user):
+				login(request,user)
+				return HttpResponseRedirect('/rango/')
+			else:
+				return HttpResponse("your rango acount is diabled.")
+
+		else:
+			print "invald login in information"
+			return HttpResponse("invald login details supplied")
+
+	else:
+		return render(request,'rango/login.html',{})
