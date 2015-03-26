@@ -99,7 +99,6 @@ def restricted(request):
 	return render(request,'rango/restricted.html',{})
 
 def get_category_list(max_results=0, starts_with=''):
-	print "hello2"
 	cat_list = []
 	if starts_with:
 		cat_list = Category.objects.filter(name__istartswith=starts_with)
@@ -111,13 +110,12 @@ def get_category_list(max_results=0, starts_with=''):
 	return cat_list
 
 def suggest_category(request):
-	print "hello"
 	cat_list = []
 	starts_with = ''
 	if request.method == 'GET':
 		starts_with = request.GET['suggestion']
 
 	cat_list = get_category_list(8, starts_with)
-	#print cat_list
+
 
 	return render(request, 'rango/category_list.html', {'categories': cat_list })
