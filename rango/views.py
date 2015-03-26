@@ -34,6 +34,7 @@ def index(request):
 	return render(request,'rango/index.html',context_dict)
 	
 def about(request):
+	print "hello"
 	return render(request,'rango/about.html')
 
 def category(request,category_name_slug):
@@ -96,3 +97,27 @@ def add_page(request,category_name_slug):
 @login_required
 def restricted(request):
 	return render(request,'rango/restricted.html',{})
+
+def get_category_list(max_results=0, starts_with=''):
+	print "hello2"
+	cat_list = []
+	if starts_with:
+		cat_list = Category.objects.filter(name__istartswith=starts_with)
+
+	if max_results > 0:
+		if len(cat_list) > max_results:
+			cat_list = cat_list[:max_results]
+
+	return cat_list
+
+def suggest_category(request):
+	print "hello"
+	cat_list = []
+	starts_with = ''
+	if request.method == 'GET':
+		starts_with = request.GET['suggestion']
+
+	cat_list = get_category_list(8, starts_with)
+	#print cat_list
+
+	return render(request, 'rango/category_list.html', {'categories': cat_list })
