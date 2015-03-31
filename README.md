@@ -1,2 +1,3 @@
 # Rango
-Django
+a site to share programming resources  
+Django  
