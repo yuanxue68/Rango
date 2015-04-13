@@ -1,3 +1,3 @@
-# Rango
-a site to share programming resources  
-Django  
+# Rango  
+
+Following [Tango with Django Tutorial](http://www.tangowithdjango.com/)
